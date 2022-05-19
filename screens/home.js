@@ -24,7 +24,7 @@ export default function home({ navigation }) {
   const [password, setPassword] = useState('');
 
   const login = (emailLower) => {
-      fetch('http://192.168.136.248:5000/owners', {
+      fetch('http://34.134.18.89:5000/owners', {
       method: 'POST',
       headers: {
           'Accept': 'application/json',
