@@ -15,7 +15,8 @@ import React, { useState } from 'react';
    TextInput,
    Button,
    Alert,
-   Keyboard
+   Keyboard,
+   ImageBackground
  } from 'react-native';
 
 const addGuest = ({ navigation }) => {
@@ -70,7 +71,8 @@ const addGuest = ({ navigation }) => {
    }
  
    const hashStrings = async () => {
-     const fullString = guestName + ',' + enteranceDate + ',' + carId;
+     const time = Date.now();
+     const fullString = guestName + ',' + enteranceDate + ',' + carId + ',' + time;
      const sha256Hash = await RNSimpleCrypto.SHA.sha256(fullString);
      //setHashedData(sha256Hash);
  
@@ -104,34 +106,52 @@ const addGuest = ({ navigation }) => {
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+      
     },
     input: {
-      borderWidth: 1,
-      borderColor: '#777',
+      borderWidth: 2,
+      borderColor: '#FFF',
       padding: 8,
       margin: 10,
-      width: 200,
+      width: 350,
+      backgroundColor:'white'
     },
     signInLogo: {
-      width: '75%',
+      marginBottom: 40,
+      width: '90%',
       height: 140,
     },
     label: {
-      fontSize: 18,
+      fontSize: 23,
+      color: 'white'
     },
     forgotPass: {
       margin: 20,
-      color: '#444',
+      color: 'white',
       fontSize: 15,
+
     },
+    backgoundimage: {
+      flex: 1,
+      position: 'relative',
+      height: '100%',
+      width: '100%',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    button: {
+      padding: 20,
+      width: 300,
+    }
   });
 
   return (
      <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss(); }}>
        <View style={styles.container}>
+       <ImageBackground source={require('../assets/background/1.jpeg')} resizeMode="cover" style={styles.backgoundimage}>
          <Image
            style={styles.signInLogo}
-           source={require('../assets/site-assets/secureGate-logo.png')}
+           source={require('../assets/site-assets/SecureGate-logos_white.png')}
          />
          <Text style={styles.label}>Guest Name:</Text>
          <TextInput
@@ -154,11 +174,14 @@ const addGuest = ({ navigation }) => {
            keyboardType="default"
            onChangeText={val => setCarId(val)}
          />
-         <Button
-           title="Generate QR Code"
-           color="#777"
-           onPress={() => hashStrings(guestName, enteranceDate, carId)}
-         />
+         <View style={styles.button}>
+          <Button
+            title="Generate QR Code"
+            color="#1373AD"
+            onPress={() => hashStrings(guestName, enteranceDate, carId)}
+          />
+         </View>
+        </ImageBackground>
        </View>
      </TouchableWithoutFeedback>
   )

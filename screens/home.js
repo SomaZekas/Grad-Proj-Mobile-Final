@@ -15,7 +15,8 @@ import {
     TextInput,
     Button,
     Alert,
-    Keyboard
+    Keyboard,
+    ImageBackground
 } from 'react-native';
 
 export default function home({ navigation }) {
@@ -55,13 +56,15 @@ export default function home({ navigation }) {
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+      
     },
     input: {
-      borderWidth: 1,
-      borderColor: '#000',
+      borderWidth: 2,
+      borderColor: '#FFF',
       padding: 8,
       margin: 10,
       width: 350,
+      backgroundColor:'white'
     },
     signInLogo: {
       marginBottom: 40,
@@ -70,20 +73,36 @@ export default function home({ navigation }) {
     },
     label: {
       fontSize: 23,
+      color: 'white'
     },
     forgotPass: {
       margin: 20,
-      color: '#444',
+      color: 'white',
       fontSize: 15,
+
     },
+    backgoundimage: {
+      flex: 1,
+      position: 'relative',
+      height: '100%',
+      width: '100%',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    button: {
+      padding: 20,
+      width: 300,
+    }
   });
 
   return (
     <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss();}}>
         <View style={styles.container}>
+        
+        <ImageBackground source={require('../assets/background/1.jpeg')} resizeMode="cover" style={styles.backgoundimage}>
             <Image 
             style={styles.signInLogo}
-            source={require('../assets/site-assets/secureGate-logo.png')} 
+            source={require('../assets/site-assets/SecureGate-logos_white.png')} 
             />
             <Text style={styles.label}>Email:</Text>
             <TextInput 
@@ -98,16 +117,19 @@ export default function home({ navigation }) {
             secureTextEntry={true}
             onChangeText={(val => setPassword(val))}
             />
-            <Button 
-            title = 'LOGIN'
-            color = '#000'
-            onPress={() => login(email.toLowerCase())}
-            />
+            <View style={styles.button}>
+              <Button 
+              title = 'LOGIN'
+              color='#1373AD'
+              onPress={() => login(email.toLowerCase())}
+              />
+            </View>
             <Text 
             style={styles.forgotPass} 
             onPress={() => Alert.alert('Contact Administration',
             'Please contant the administration on 1234 to resend your password.')}
             >Forgot Password?</Text>
+          </ImageBackground>
         </View>
     </TouchableWithoutFeedback>
   )

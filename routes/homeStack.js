@@ -6,13 +6,28 @@ import GenerateQR from '../screens/GenerateQR'
 
 const screens = {
     Home: {
-        screen: Home
+        screen: Home,
+        navigationOptions: {
+            headerShown: false,
+            headerTransparent: true,
+            headerTintColor: '#fff',
+        },
     },
     AddGuest: {
-        screen: AddGuest
+        screen: AddGuest,
+        navigationOptions: {
+            title: 'Add Guest',
+            headerTransparent: true,
+            headerTintColor: '#fff',
+        },
     },
     GenerateQR: {
-        screen: GenerateQR
+        screen: GenerateQR,
+        navigationOptions: {
+            title: 'Generated QR Code',
+            headerTransparent: true,
+            headerTintColor: '#fff',
+        },
     }
 }
 
