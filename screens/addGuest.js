@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
  import type { Node } from 'react';
+ import DatePicker from 'react-native-date-picker'
  import RNSimpleCrypto from 'react-native-simple-crypto';
  import { sha256 } from 'react-native-sha256';
  import {
@@ -27,8 +28,9 @@ const addGuest = ({ navigation }) => {
    //   currentDate.getFullYear()
    // ];
    const [guestName, setGuestName] = useState('');
-   const [enteranceDate, setEntranceDate] = useState('');
+   //const [enteranceDate, setEntranceDate] = useState('');
    const [carId, setCarId] = useState('');
+   const [date, setDate] = useState(new Date())
    //const [hashedData, setHashedData] = useState('');
  
    const RSAPublicKey = '-----BEGIN PUBLIC KEY-----\n' +
@@ -50,7 +52,7 @@ const addGuest = ({ navigation }) => {
            ownerEmail: 'ali@hi.com',
            ownerPassword: '123',
            name: guestName,
-           date: enteranceDate,
+           date: date.toLocaleDateString(),
            car_id: carId,
            used: false,
            hashed: hashed
@@ -72,7 +74,7 @@ const addGuest = ({ navigation }) => {
  
    const hashStrings = async () => {
      const time = Date.now();
-     const fullString = guestName + ',' + enteranceDate + ',' + carId + ',' + time;
+     const fullString = guestName + ',' + date.toLocaleDateString() + ',' + carId + ',' + time;
      const sha256Hash = await RNSimpleCrypto.SHA.sha256(fullString);
      //setHashedData(sha256Hash);
  
@@ -84,7 +86,7 @@ const addGuest = ({ navigation }) => {
        RSAPublicKey
      );
      console.log('\n-------\nData: ' + fullString + '\nHash: ' + sha256Hash + '\nRSA Encrypted: ' + RSAEncryptedMessage + '\n-------');
- 
+      
      sendGuestData(sha256Hash, RSAEncryptedMessage);
  
  
@@ -161,12 +163,23 @@ const addGuest = ({ navigation }) => {
            onChangeText={val => setGuestName(val)}
          />
          <Text style={styles.label}>Entrance Date:</Text>
-         <TextInput
+         <View style={{backgroundColor: 'rgb(255, 255, 255)'}}>
+            <DatePicker 
+                mode='date'
+                date={date} 
+                onDateChange={setDate}
+                fadeToColor={'#1373AD'}
+                textColor={'black'}
+                androidVariant = 'nativeAndroid'
+                minimumDate={new Date()}
+              />
+          </View>
+         {/* <TextInput
            style={styles.input}
            placeholder="30-01-2022"
            keyboardType="default"
            onChangeText={val => setEntranceDate(val)}
-         />
+         /> */}
          <Text style={styles.label}>Car Plate Numbers:</Text>
          <TextInput
            style={styles.input}

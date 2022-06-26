@@ -35,6 +35,7 @@ export default function GenerateQR({ navigation }) {
         },
         qrCode: {
           margin: 20,
+          
         }
       });
 
@@ -46,14 +47,15 @@ export default function GenerateQR({ navigation }) {
            style={styles.Logo}
            source={require('../assets/site-assets/SecureGate-logos_white.png')}
         />
-
-        <View style={styles.qrCode}>
-          <QRCode
-            value={navigation.getParam('rsa')}
-            size={350}
-            bgColor="black"
-            fgColor="white"
-          />
+        <View style={{backgroundColor: 'rgb(255, 255, 255)'}}>
+          <View style={styles.qrCode}>
+            <QRCode
+              value={navigation.getParam('rsa')}
+              size={350}
+              bgColor="black"
+              fgColor="white"
+            />
+          </View>
         </View>
         <Text style={styles.title}>
           Screenshot and Send this QR to the Guest.
