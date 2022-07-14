@@ -15,7 +15,8 @@ export const globalStyles = StyleSheet.create({
         margin: 10,
         width: 350,
         backgroundColor:'white',
-
+        color: 'black',
+        
     },
     signInLogo: {
         marginBottom: 40,

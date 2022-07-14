@@ -28,7 +28,7 @@ const addGuest = ({ navigation }) => {
   '-----END PUBLIC KEY-----';
  
   const sendGuestData = (hashed, RsaMessage) => {
-    fetch('http://34.134.18.89:5000/owners/newguest', {
+    fetch('http://192.168.135.247:5000/owners/newguest', {
       method: 'POST',
       headers: {
           'Accept': 'application/json',
